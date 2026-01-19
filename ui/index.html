@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Calculatrice Professionnelle</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 40px; }
+        input, button { font-size: 1.1em; margin: 6px; padding: 6px; }
+        #email-status { margin-top: 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Ma Calculatrice Professionnelle</h1>
+    <input type="text" id="input-nom-complet" placeholder="Nom complet" size="40"/><br/>
+    <input type="email" id="input-email" placeholder="Email professionnel (@company.com)" /><br/>
+    <input type="number" id="input-a" placeholder="Nombre A" />
+    <input type="number" id="input-b" placeholder="Nombre B" />
+    
+    <button id="btn-add">+</button>
+    <button id="btn-sub">-</button>
+    <button id="btn-mul">×</button>
+    <button id="btn-div">÷</button>
+    <br/><br/>
+    
+    <div>Résultat: <span id="output">?</span></div>
+    <div id="email-status"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
