@@ -1,0 +1,467 @@
+\documentclass[11pt, a4paper]{article}
+
+% ========================================
+% PACKAGES DE BASE
+% ========================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+
+% ========================================
+% PACKAGES POUR LA MISE EN PAGE
+% ========================================
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{listings} % Pour l'insertion de code
+\usepackage{xcolor}   % Pour la coloration du code
+
+% hyperref doit être chargé en dernier
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+% ========================================
+% CONFIGURATION LISTINGS (CODE)
+% ========================================
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{htmlstyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=HTML
+}
+
+\lstdefinestyle{jsstyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=JavaScript
+}
+
+\lstset{style=jsstyle}
+
+% ========================================
+% CONFIGURATION EN-T\^ETE ET PIED DE PAGE
+% ========================================
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyhf{}
+\fancyfoot[L]{BOUANANI Abderrahman}
+\fancyfoot[R]{\textbf{Page \thepage/\pageref{LastPage}}}
+
+\parindent=0cm
+
+% ========================================
+% INFORMATIONS DU DOCUMENT
+% ========================================
+\newcommand{\monTitre}{TP 4: Tests Fonctionnels avec Cypress}
+\newcommand{\monSousTitre}{Calculatrice Professionnelle avec Validation Email}
+\newcommand{\maFiliere}{D\'eveloppement Logiciel et Applicatif (DLA) - 2\`eme Ann\'ee}
+\newcommand{\monAnnee}{2024-2025}
+\newcommand{\monEtudiantUn}{BOUANANI Abderrahman}
+\newcommand{\monProfesseur}{Prof. Aimad QAZDAR}
+
+% ========================================
+% D\'EBUT DU DOCUMENT
+% ========================================
+\begin{document}
+
+% ========================================
+% PAGE DE GARDE
+% ========================================
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    
+    \includegraphics[width=0.4\textwidth]{figures/ENSAA.png}
+    \hfill
+    \includegraphics[width=0.4\textwidth]{figures/UIZ.png}
+    
+    \vspace{2cm}
+    
+    {\scshape\LARGE \'Ecole Nationale des Sciences Appliqu\'ees d'Agadir\par}
+    \vspace{0.5cm}
+    {\scshape\Large \maFiliere\par}
+    
+    \vspace{1.5cm}
+    
+    {\huge\bfseries \monTitre\par}
+    \vspace{0.5cm}
+    {\Large\bfseries \monSousTitre\par}
+    
+    \vspace{2cm}
+    
+    \large
+    \textit{R\'ealis\'e par :} \\
+    \vspace{0.5cm}
+    \textbf{\monEtudiantUn} \\
+    
+    \vspace{1cm}
+    
+    \textit{Encadr\'e par :} \\
+    \vspace{0.5cm}
+    \textbf{\monProfesseur}
+
+    \vfill
+    
+    {\large Ann\'ee Universitaire : \monAnnee\par}
+    \vspace{0.5cm}
+    {\large Date : \today\par}
+    
+\end{titlepage}
+
+% ========================================
+% TABLE DES MATI\`ERES
+% ========================================
+\tableofcontents
+\newpage
+
+% ========================================
+% INTRODUCTION
+% ========================================
+\section{Introduction}
+Ce document constitue le compte rendu du TP 4, consacr\'e aux tests fonctionnels avec Cypress. L'objectif principal \'etait de cr\'eer une application web (calculatrice professionnelle) et d'impl\'ementer une suite de tests end-to-end (E2E) pour valider son comportement. Ce TP met l'accent sur l'automatisation des tests d'interface utilisateur, la g\'en\'eration de donn\'ees de test avec Faker, et la validation de r\`egles m\'etier complexes (validation d'email corporate).
+
+\subsection{Objectifs du TP}
+\begin{itemize}
+    \item Cr\'eer une application web fonctionnelle avec HTML/CSS/JavaScript
+    \item Configurer un environnement de test Cypress
+    \item Impl\'ementer des tests E2E couvrant les cas nominaux et limites
+    \item Utiliser Faker pour g\'en\'erer des donn\'ees de test r\'ealistes
+    \item Valider des r\`egles m\'etier (validation email @company.com)
+\end{itemize}
+
+\subsection{D\'ep\^ot GitHub}
+Le code complet du projet est disponible sur GitHub : \\
+\href{https://github.com/abderrahmanBouanani/Cypress---Configuration-and-Functional-Testing}{TP4 Cypress - GitHub Repository}
+
+% ========================================
+% ARCHITECTURE DU PROJET
+% ========================================
+\section{Architecture du Projet}
+
+\subsection{Structure des Fichiers}
+\begin{verbatim}
+TP4_Cypress/
+└── ui/
+    ├── index.html              # Interface utilisateur
+    ├── app.js                  # Logique JavaScript
+    ├── cypress.config.js       # Configuration Cypress
+    ├── package.json            # Dépendances npm
+    └── cypress/
+        └── e2e/
+            └── calculatrice.cy.js  # Suite de tests
+\end{verbatim}
+
+\subsection{Technologies Utilis\'ees}
+\begin{itemize}
+    \item \textbf{Frontend} : HTML5, CSS3, JavaScript (Vanilla)
+    \item \textbf{Tests} : Cypress v15.9.0
+    \item \textbf{G\'en\'eration de donn\'ees} : @faker-js/faker v9.9.0
+    \item \textbf{Serveur web} : http-server
+\end{itemize}
+
+% ========================================
+% CODE SOURCE
+% ========================================
+\section{Code Source}
+
+\subsection{Interface HTML (index.html)}
+\begin{lstlisting}[style=htmlstyle, caption={index.html - Interface de la calculatrice}]
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Calculatrice Professionnelle</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 40px; }
+        input, button { font-size: 1.1em; margin: 6px; padding: 6px; }
+        #email-status { margin-top: 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Ma Calculatrice Professionnelle</h1>
+    <input type="text" id="input-nom-complet" placeholder="Nom complet" size="40"/><br/>
+    <input type="email" id="input-email" placeholder="Email professionnel (@company.com)" /><br/>
+    <input type="number" id="input-a" placeholder="Nombre A" />
+    <input type="number" id="input-b" placeholder="Nombre B" />
+    
+    <button id="btn-add">+</button>
+    <button id="btn-sub">-</button>
+    <button id="btn-mul">x</button>
+    <button id="btn-div">/</button>
+    <br/><br/>
+    
+    <div>Resultat: <span id="output">?</span></div>
+    <div id="email-status"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+\end{lstlisting}
+
+\subsection{Logique JavaScript (app.js)}
+\begin{lstlisting}[style=jsstyle, caption={app.js - Logique m\'etier de la calculatrice}]
+// Fonctions de calcul de base
+function add(a, b) { return a + b; }
+function sub(a, b) { return a - b; }
+function mul(a, b) { return a * b; }
+function div(a, b) { return b !== 0 ? a / b : 'Erreur'; }
+
+// Validation : L'email doit finir par @company.com
+function isValidCorporateEmail(email) {
+    return email && email.endsWith('@company.com');
+}
+
+function updateEmailStatus(email) {
+    const el = document.getElementById('email-status');
+    if (!email) {
+        el.textContent = '';
+    } else if (isValidCorporateEmail(email)) {
+        el.textContent = 'Email valide';
+        el.style.color = 'green';
+    } else {
+        el.textContent = 'Doit se terminer par @company.com';
+        el.style.color = 'red';
+    }
+}
+
+// Regle : Addition bloquee si l'email est invalide
+function isCalculationAllowed() {
+    const email = document.getElementById('input-email').value;
+    return !email || isValidCorporateEmail(email);
+}
+
+function displayResult(value) {
+    document.getElementById('output').textContent = value;
+}
+
+// Ecouteur sur l'email
+document.getElementById('input-email').addEventListener('input', (e) => {
+    updateEmailStatus(e.target.value);
+});
+
+// Bouton Addition (avec protection)
+document.getElementById('btn-add').addEventListener('click', () => {
+    if (!isCalculationAllowed()) {
+        displayResult('Erreur: Email invalide');
+        return;
+    }
+    const a = parseFloat(document.getElementById('input-a').value) || 0;
+    const b = parseFloat(document.getElementById('input-b').value) || 0;
+    displayResult(add(a, b));
+});
+
+// Autres boutons (sans protection)
+['sub', 'mul', 'div'].forEach(op => {
+    document.getElementById(`btn-${op}`).addEventListener('click', () => {
+        const a = parseFloat(document.getElementById('input-a').value) || 0;
+        const b = parseFloat(document.getElementById('input-b').value) || 0;
+        let result;
+        switch (op) {
+            case 'sub': result = sub(a, b); break;
+            case 'mul': result = mul(a, b); break;
+            case 'div': result = div(a, b); break;
+        }
+        displayResult(result);
+    });
+});
+\end{lstlisting}
+
+\subsection{Suite de Tests Cypress (calculatrice.cy.js)}
+\begin{lstlisting}[style=jsstyle, caption={calculatrice.cy.js - Tests E2E complets}]
+import { faker } from '@faker-js/faker';
+
+describe('Calculatrice - Tests Fonctionnels Complets', () => {
+    
+    // Avant chaque test, on visite la page de la calculatrice
+    beforeEach(() => {
+        cy.visit('http://localhost:8080');
+    });
+
+    // --- 1. Verification de l'interface ---
+    it('affiche correctement le titre de la calculatrice', () => {
+        cy.contains('Ma Calculatrice Professionnelle').should('be.visible');
+    });
+
+    // --- 2. Tests des operations mathematiques ---
+    it('additionne 7 et 3 (Operation simple)', () => {
+        cy.get('#input-a').type('7');
+        cy.get('#input-b').type('3');
+        cy.get('#btn-add').click();
+        cy.get('#output').should('have.text', '10');
+    });
+
+    it('soustrait 5 de 12 (Logique TODO completee)', () => {
+        cy.get('#input-a').type('12');
+        cy.get('#input-b').type('5');
+        cy.get('#btn-sub').click();
+        cy.get('#output').should('have.text', '7');
+    });
+
+    it('divise 12 par 3 (Logique TODO completee)', () => {
+        cy.get('#input-a').type('12');
+        cy.get('#input-b').type('3');
+        cy.get('#btn-div').click();
+        cy.get('#output').should('have.text', '4');
+    });
+
+    it('affiche "Erreur" lors d\'une division par zero', () => {
+        cy.get('#input-a').type('10');
+        cy.get('#input-b').type('0');
+        cy.get('#btn-div').click();
+        cy.get('#output').should('have.text', 'Erreur');
+    });
+
+    // --- 3. Tests Metier Avances (Email Corporate) avec Faker ---
+    
+    it('Email valide (@company.com) -> Calcul autorise', () => {
+        // Generation de donnees aleatoires realistes
+        const prenom = faker.person.firstName();
+        const nom = faker.person.lastName();
+        // Force un email avec le bon domaine
+        const emailValide = faker.internet.email({ 
+            firstName: prenom, 
+            lastName: nom, 
+            provider: 'company.com' 
+        });
+
+        // Interaction
+        cy.get('#input-nom-complet').type(`${prenom} ${nom}`);
+        cy.get('#input-email').type(emailValide);
+
+        // Verification visuelle du statut
+        cy.get('#email-status')
+          .should('contain', 'Email valide')
+          .and('have.css', 'color', 'rgb(0, 128, 0)'); // Vert
+
+        // Test d'une operation (Multiplication)
+        cy.get('#input-a').type('4');
+        cy.get('#input-b').type('2');
+        cy.get('#btn-mul').click();
+
+        // Validation du resultat
+        cy.get('#output').should('have.text', '8');
+    });
+
+    it('Email invalide (Gmail/Yahoo...) -> Blocage de l\'addition', () => {
+        // Generation d'un email quelconque
+        const emailInvalide = faker.internet.email({ provider: 'gmail.com' });
+
+        cy.get('#input-email').type(emailInvalide);
+
+        // Verification immediate du message d'erreur
+        cy.get('#email-status')
+          .should('contain', 'Doit se terminer par @company.com')
+          .and('have.css', 'color', 'rgb(255, 0, 0)'); // Rouge
+
+        // Tentative d'addition
+        cy.get('#input-a').type('5');
+        cy.get('#input-b').type('5');
+        cy.get('#btn-add').click();
+
+        // Le calcul ne doit PAS se faire
+        cy.get('#output').should('contain', 'Erreur: Email invalide');
+    });
+});
+\end{lstlisting}
+
+% ========================================
+% RESULTATS DES TESTS
+% ========================================
+\section{R\'esultats des Tests}
+
+\subsection{Ex\'ecution des Tests}
+La suite de tests a \'et\'e ex\'ecut\'ee avec succ\`es. Tous les 7 tests sont pass\'es sans erreur.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/cypress_tests.png}
+    \caption{R\'esultats des tests Cypress - 7/7 tests r\'eussis}
+    \label{fig:cypress_results}
+\end{figure}
+
+\subsection{D\'etail des Tests}
+\begin{enumerate}
+    \item \textbf{Test d'interface} : V\'erifie que le titre "Ma Calculatrice Professionnelle" s'affiche correctement
+    \item \textbf{Addition} : Teste 7 + 3 = 10
+    \item \textbf{Soustraction} : Teste 12 - 5 = 7
+    \item \textbf{Division} : Teste 12 ÷ 3 = 4
+    \item \textbf{Division par z\'ero} : V\'erifie que la division par 0 affiche "Erreur"
+    \item \textbf{Email valide} : Teste qu'un email @company.com permet les calculs et affiche un statut vert
+    \item \textbf{Email invalide} : V\'erifie que l'addition est bloqu\'ee avec un email non-corporate et affiche un message d'erreur rouge
+\end{enumerate}
+
+% ========================================
+% ANALYSE
+% ========================================
+\section{Analyse et Points Cl\'es}
+
+\subsection{Int\'egration de Faker}
+L'utilisation de \texttt{@faker-js/faker} a permis de g\'en\'erer des donn\'ees de test r\'ealistes et vari\'ees. Plut\^ot que d'utiliser des valeurs statiques, chaque ex\'ecution de test utilise des noms et emails diff\'erents, ce qui augmente la robustesse des tests.
+
+\subsection{Validation M\'etier}
+La r\`egle m\'etier impl\'ement\'ee (seuls les emails @company.com sont autoris\'es pour l'addition) d\'emontre comment Cypress peut valider non seulement les calculs, mais aussi les r\`egles de gestion complexes. Les tests v\'erifient :
+\begin{itemize}
+    \item L'affichage visuel du statut (couleur verte/rouge)
+    \item Le contenu textuel du message
+    \item Le blocage effectif de l'op\'eration
+\end{itemize}
+
+\subsection{Gestion des Cas Limites}
+Le test de division par z\'ero illustre l'importance de tester les cas limites. L'application g\`ere correctement cette situation en affichant "Erreur" plut\^ot que de crasher ou d'afficher un r\'esultat incorrect.
+
+\subsection{Architecture de Tests}
+L'utilisation de \texttt{beforeEach()} garantit que chaque test d\'emarre avec une page fra\^iche, \'evitant ainsi les effets de bord entre tests. Cette approche assure l'ind\'ependance et la fiabilit\'e de chaque test.
+
+% ========================================
+% CONCLUSION
+% ========================================
+\section{Conclusion}
+Ce TP a permis de ma\^itriser les fondamentaux des tests fonctionnels avec Cypress. L'installation et la configuration de l'environnement, bien que parfois d\'elicate (probl\`emes de timeout r\'esolus), ont abouti \`a un syst\`eme de test robuste et complet. 
+
+Les 7 tests impl\'ement\'es couvrent l'ensemble des fonctionnalit\'es de l'application : interface, op\'erations math\'ematiques, gestion d'erreurs, et validation m\'etier. L'int\'egration de Faker d\'emontre comment automatiser la g\'en\'eration de donn\'ees de test r\'ealistes.
+
+Ce projet illustre l'importance des tests E2E dans le d\'eveloppement web moderne, permettant de valider le comportement de l'application du point de vue de l'utilisateur final.
+
+\end{document}
