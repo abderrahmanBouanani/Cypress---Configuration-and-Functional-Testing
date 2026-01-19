@@ -3,11 +3,11 @@
 [![Cypress](https://img.shields.io/badge/Cypress-15.9.0-green.svg)](https://www.cypress.io/)
 [![Faker](https://img.shields.io/badge/Faker-9.9.0-blue.svg)](https://fakerjs.dev/)
 
-## 📋 Description
+## Description
 
 Projet de TP4 consacré aux tests fonctionnels avec Cypress. Ce projet implémente une calculatrice professionnelle avec validation d'email corporate et une suite complète de tests end-to-end (E2E).
 
-## 🎯 Objectifs
+## Objectifs
 
 - Créer une application web fonctionnelle avec HTML/CSS/JavaScript
 - Configurer un environnement de test Cypress
@@ -15,7 +15,7 @@ Projet de TP4 consacré aux tests fonctionnels avec Cypress. Ce projet implémen
 - Utiliser Faker pour générer des données de test réalistes
 - Valider des règles métier (validation email @company.com)
 
-## 🏗️ Structure du Projet
+## Structure du Projet
 
 ```
 TP4_Cypress/
@@ -34,7 +34,7 @@ TP4_Cypress/
 └── .gitignore
 ```
 
-## 🚀 Installation
+## Installation
 
 ### Prérequis
 
@@ -60,7 +60,7 @@ npm install
 npm install -g http-server
 ```
 
-## 💻 Utilisation
+## Utilisation
 
 ### Lancer l'application
 
@@ -86,7 +86,7 @@ cd ui
 npx cypress run
 ```
 
-## ✨ Fonctionnalités
+## Fonctionnalités
 
 ### Application Calculatrice
 
@@ -105,7 +105,7 @@ npx cypress run
 6. ✅ Test avec email valide (@company.com)
 7. ✅ Test avec email invalide (blocage de l'addition)
 
-## 🛠️ Technologies Utilisées
+## Technologies Utilisées
 
 - **Frontend** : HTML5, CSS3, JavaScript (Vanilla)
 - **Tests** : Cypress v15.9.0
@@ -113,29 +113,28 @@ npx cypress run
 - **Serveur web** : http-server
 - **Documentation** : LaTeX
 
-## 📊 Résultats des Tests
+## Résultats des Tests
 
 Tous les 7 tests passent avec succès :
 
 ![Résultats des tests Cypress](Rapport/figures/cypress_tests.png)
 
-## 📄 Documentation
+## Documentation
 
 Le rapport complet du TP est disponible dans le dossier `Rapport/` :
 - **Source LaTeX** : `CR_BOUANANI_TP4_Cypress.tex`
 - **PDF** : `CR_BOUANANI_TP4_Cypress.pdf`
 
-## 👨‍💻 Auteur
+## Auteur
 
 **BOUANANI Abderrahman**  
 Développement Logiciel et Applicatif (DLA) - 2ème Année  
 École Nationale des Sciences Appliquées d'Agadir
 
-## 📝 Licence
+## Licence
 
 Ce projet est réalisé dans le cadre d'un TP académique.
 
-## 🙏 Remerciements
+## Remerciements
 
 - Prof. Aimad QAZDAR pour l'encadrement
-- ENSAA pour la formation
